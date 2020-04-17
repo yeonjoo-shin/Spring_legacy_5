@@ -3,6 +3,7 @@ package com.naver.s5.notice;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,19 @@ public class NoticeDAO implements BoardDAO {
 	private final String NAMESPACE="com.naver.s5.notice.NoticeDAO.";
 	
 	@Override
-	public List<BoardVO> boardList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public long boardCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"boardCount");
+	}
+	
+	@Override
+	public List<BoardVO> boardList(Map<String,Integer> map) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"boardList",map);
 	}
 
 	@Override
-	public BoardVO boardSelect() throws Exception {
+	public BoardVO boardSelect(long num) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"boardSelect", num);
 	}
 
 	@Override
@@ -46,8 +51,8 @@ public class NoticeDAO implements BoardDAO {
 	}
 	
 	@Override
-	public int hitUpdate(BoardVO boardVO) throws Exception {
-		return sqlSession.update(NAMESPACE+"hitUpdate",boardVO);
+	public int hitUpdate(long num) throws Exception {
+		return sqlSession.update(NAMESPACE+"hitUpdate",num);
 	}
 	
 }
