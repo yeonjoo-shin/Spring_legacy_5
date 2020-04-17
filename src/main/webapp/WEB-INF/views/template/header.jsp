@@ -20,6 +20,7 @@
       </li>
       <li><a href="${pageContext.request.contextPath}/point/pointList">Point</a></li>
       <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
+       <li><a href="${pageContext.request.contextPath}/qna/qnaList">Qna</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
     <c:if test="${empty member}">
