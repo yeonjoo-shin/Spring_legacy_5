@@ -2,7 +2,7 @@ package com.naver.s5.notice;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.s5.board.BoardVO;
+
 
 @Controller
 @RequestMapping("/notice/**")
@@ -76,9 +77,9 @@ public class NoticeController {
 	public ModelAndView boardWrite(NoticeVO noticeVO, ModelAndView mv) throws Exception{
 		int result=noticeService.boardWrite(noticeVO);
 		
-		if(result>0) {//성공 ->list로
+		if(result>0) {//�꽦怨� ->list濡�
 			mv.setViewName("redirect:./noticeList");
-		}else {//실패 ->alert 하고 list로..?
+		}else {//�떎�뙣 ->alert �븯怨� list濡�..?
 			mv.addObject("result","write fail");
 			mv.addObject("path","./noticeList");
 			

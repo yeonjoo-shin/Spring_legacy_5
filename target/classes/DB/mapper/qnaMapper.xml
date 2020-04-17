@@ -5,6 +5,7 @@
   
   
 <mapper namespace="com.naver.s5.qna.QnaDAO">
+
 	<insert id="boardWrite" parameterType="com.naver.s5.qna.QnaVO">
 		insert into qna values(board_seq.nextval,#{title},#{name},sysdate,0,0,0,0,#{content})
 	</insert>
