@@ -13,8 +13,8 @@
 
 
 <div class="container">
-<h1>${borad} write </h1>
-<form action="./noticeWrite" method="post">
+<h1>${borad}write </h1>
+<form action="./${board}Write" method="post">
   
      <div class="form-group">
       <label for="title">title:</label>

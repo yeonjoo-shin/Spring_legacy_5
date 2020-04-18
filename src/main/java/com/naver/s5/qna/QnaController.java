@@ -24,6 +24,7 @@ public class QnaController {
 	public String getBoard() throws Exception{
 		return "qna";
 	}
+	
 	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
 	public ModelAndView boardDelete(long num, ModelAndView mv) throws Exception{
 		int result = qnaService.boardDelete(num);
@@ -47,14 +48,14 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
-	public String boardUpdate(NoticeVO noticeVO) throws Exception{
-		int result = qnaService.boardUpdate(noticeVO);
+	public String boardUpdate(QnaVO qnaVO) throws Exception{
+		int result = qnaService.boardUpdate(qnaVO);
 		String path="";
 		
 		if(result>0) {
 			path="redirect:./qnaList";
 		}else {
-			path="redirect:./qnaSelect?num="+noticeVO.getNum();
+			path="redirect:./qnaSelect?num="+qnaVO.getNum();
 		}
 		return path;
 	}
@@ -67,14 +68,16 @@ public class QnaController {
 	
 	
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
-	public ModelAndView boardWrite(NoticeVO noticeVO,ModelAndView mv) throws Exception{
-		int result = qnaService.boardWrite(noticeVO);
+	public ModelAndView boardWrite(QnaVO qnaVO,ModelAndView mv) throws Exception{
+		int result = qnaService.boardWrite(qnaVO);
 		
 		if(result>0) {
 			mv.setViewName("redirect:./qnaList");
 		}else {
 			mv.addObject("result","write fail");
 			mv.addObject("path","./qnaList");
+			
+			mv.setViewName("common/result");
 		}
 		return mv;
 	}
@@ -92,14 +95,13 @@ public class QnaController {
 	
 	@RequestMapping(value ="qnaList",method = RequestMethod.GET)
 	public ModelAndView boardList(ModelAndView mv, @RequestParam(defaultValue = "1") int curPage) throws Exception{
+		
 		List<BoardVO> ar = qnaService.boardList(curPage);
 		mv.addObject("list",ar);
 		mv.setViewName("board/boardList");
 		return mv;
 	}
 	
-	
-	
-	
+
 	
 }

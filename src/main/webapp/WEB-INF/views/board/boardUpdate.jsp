@@ -10,10 +10,10 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-	<h1>${board} page</h1>
+	<h1>${board}page</h1>
 	<div class="container">
 
-<form action="./noticeUpdate" method="post">
+<form action="./${board}Update" method="post">
   	<input type="hidden" name="num" value="${vo.num}">
      <div class="form-group">
       <label for="title">title:</label>

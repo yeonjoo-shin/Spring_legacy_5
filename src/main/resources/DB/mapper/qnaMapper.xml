@@ -22,18 +22,18 @@
 		update qna set hit=hit+1 where num=#{num}
 	</update>
 	
-	<select id="boardSelect" parameterType="java.lang.Long">
+	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.naver.s5.qna.QnaVO">
 		select * from qna where num=#{num}
 	</select>
 	
-	<select id="boardList" parameterType="java.util.Map">
+	<select id="boardList" parameterType="java.util.Map" resultType="com.naver.s5.qna.QnaVO">
 		select * from
 			(select N.*, rownum R from
 				(select * from qna order by num desc) N )
 		where R between #{startRow} and #{lastRow}
 	</select>
 	<!-- 전체 글의 갯수 가지고 오기 -->
-	<select id="boardCount" resultType="java.long.Long">
+	<select id="boardCount" resultType="java.lang.Long">
 		select count(num) from qna
 	</select>
 	
