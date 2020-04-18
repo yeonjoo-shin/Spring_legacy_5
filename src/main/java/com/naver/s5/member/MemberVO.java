@@ -7,6 +7,7 @@ public class MemberVO {
 	private int age;
 	private String email;
 	private int phone;
+	
 	public String getId() {
 		return id;
 	}
