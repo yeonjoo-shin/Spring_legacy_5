@@ -16,4 +16,8 @@
 	<delete id="memberDelete" parameterType="com.naver.s5.member.MemberVO">
 		delete member where id=#{id}
 	</delete>
+	
+	<update id="memberUpdate" parameterType="com.naver.s5.member.MemberVO">
+		UPDATE member set id=#{id},upw=#{upw},uname=#{uname},age=#{age},email=#{email},phone=#{phone} where id=#{id}
+	</update>
 </mapper>

@@ -42,6 +42,23 @@ public class MemberController {
 	public String memberDelete(MemberVO memberVO) throws Exception{
 		memberService.memberDelete(memberVO);
 		return "redirect:../";
+	}	
+	
+	@RequestMapping(value = "memberPage", method = RequestMethod.GET )
+	public String memberPage() throws Exception{
+		return "member/memberPage";
 	}
+	
+	//update 진행중
+//	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
+//	public String memberUpdate(MemberVO memberVO) throws Exception{
+//		return "member/memberUpdate";
+//	}
+//	
+//
+//	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+//	public String memberUpdate2(MemberVO memberVO) throws Exception{
+//		return "redirect:../";
+//	}
 	
 }

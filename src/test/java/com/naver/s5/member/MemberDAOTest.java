@@ -48,16 +48,38 @@ public class MemberDAOTest extends AbstractTestCase {
 //		
 //	}
 	
+//	@Test //성공
+//	public void memberDeleteTest() throws Exception{
+//		MemberVO memberVO = new MemberVO();
+//		
+//		memberVO.setId("r");
+//		
+//		
+//		int result = memberDAO.memberDelete(memberVO);
+//		assertEquals(1, result);
+//	}
+	
+	
 	@Test
-	public void memberDeleteTest() throws Exception{
+	public void memberUpdate() throws Exception{
 		MemberVO memberVO = new MemberVO();
 		
-		memberVO.setId("r");
+		memberVO.setId("sun");
+		memberVO.setUpw("sun");
+		memberVO.setUname("sun");
+		memberVO.setAge(20);
+		memberVO.setEmail("sun@naver.com");
+		memberVO.setPhone(010555);
+		memberVO.setId("mm");
 		
-		
-		int result = memberDAO.memberDelete(memberVO);
+		int result = memberDAO.memberUpdate(memberVO);
 		assertEquals(1, result);
+		
+		
 	}
+	
+	
+	
 	
 	
 }
