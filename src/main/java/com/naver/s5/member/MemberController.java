@@ -5,23 +5,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.naver.s5.board.BoardVO;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value = "memberAdd" ,  method = RequestMethod.GET)
-	public String memberAdd(MemberVO memberVO ) throws Exception{
-		
-		
+	@RequestMapping(value = "memberJoin" ,  method = RequestMethod.GET)
+	public String memberAdd(MemberVO memberVO ) throws Exception{		
 		return "member/memberJoin";
 	}
-	@RequestMapping(value = "memberAdd" ,  method = RequestMethod.POST)
+	
+	@RequestMapping(value = "memberJoin" ,  method = RequestMethod.POST)
 	public String memberAdd2(MemberVO memberVO ) throws Exception{
 		 memberService.memberAdd(memberVO);
 		
-		return "member/memberJoin";
+		return "redirect:../";
 	}
 	
 	
@@ -33,6 +34,10 @@ public class MemberController {
 	@RequestMapping(value = "memberLogin",  method = RequestMethod.POST)
 	public String memberLogin2(MemberVO memberVO)throws Exception{
 		memberService.memberLogin(memberVO);
-		return "member/memberLogin";
+		return "redirect:../";
 	}
+	
+	
+	
+	
 }
