@@ -38,6 +38,10 @@ public class MemberController {
 	}
 	
 	
-	
+	@RequestMapping(value ="memberDelete", method = RequestMethod.GET)
+	public String memberDelete(MemberVO memberVO) throws Exception{
+		memberService.memberDelete(memberVO);
+		return "redirect:../";
+	}
 	
 }

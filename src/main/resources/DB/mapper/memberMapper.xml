@@ -13,5 +13,7 @@
 		select * from member where id=#{id} and upw=#{upw}
 	</select>
 
-
+	<delete id="memberDelete" parameterType="com.naver.s5.member.MemberVO">
+		delete member where id=#{id}
+	</delete>
 </mapper>

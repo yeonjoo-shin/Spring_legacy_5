@@ -47,4 +47,17 @@ public class MemberDAOTest extends AbstractTestCase {
 //		
 //		
 //	}
+	
+	@Test
+	public void memberDeleteTest() throws Exception{
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId("r");
+		
+		
+		int result = memberDAO.memberDelete(memberVO);
+		assertEquals(1, result);
+	}
+	
+	
 }
