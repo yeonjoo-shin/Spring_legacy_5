@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.naver.s5.board.BoardService;
 import com.naver.s5.board.BoardVO;
+import com.naver.s5.board.page.Pager;
 
 
 @Service
@@ -18,24 +19,14 @@ public class QnaService implements BoardService {
 	private QnaDAO qnaDAO;
 
 	@Override
-	public List<BoardVO> boardList(int curPage) throws Exception {
-		int startRow = (curPage-1)*10+1;
-		int lastRow = curPage*10;
+	public List<BoardVO> boardList(Pager pager) throws Exception {
 		
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("startRow", startRow);
-		map.put("lastRow", lastRow);
+		pager.makeRow();
+		long totalCount = qnaDAO.boardCount(pager);//전체글의 갯수 가지고오기
+		pager.makePage(totalCount);//totalcount 넘겨주기
 		
-		//---
-		long totalCount = qnaDAO.boardCount();
-		System.out.println("totalCount : " +totalCount);
-		long totalPage = totalCount/10;
-		if(totalPage%10 !=0) {
-			totalPage++;
-		}
-		System.out.println("totalPage : " + totalPage);
 		
-		return qnaDAO.boardList(map);
+		return qnaDAO.boardList(pager);
 	}
 
 	@Override

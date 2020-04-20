@@ -6,7 +6,7 @@ public class MemberVO {
 	private String uname;
 	private int age;
 	private String email;
-	private int phone;
+	private String phone;
 	
 	public String getId() {
 		return id;
@@ -38,10 +38,10 @@ public class MemberVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	

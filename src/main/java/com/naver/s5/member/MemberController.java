@@ -1,11 +1,15 @@
 package com.naver.s5.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.s5.board.BoardVO;
+import com.naver.s5.board.page.Pager;
 
 @Controller
 @RequestMapping("/member/**")
@@ -19,10 +23,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberJoin" ,  method = RequestMethod.POST)
-	public String memberAdd2(MemberVO memberVO ) throws Exception{
-		 memberService.memberAdd(memberVO);
+	public ModelAndView memberAdd2(MemberVO memberVO,ModelAndView mv ) throws Exception{
+		 int result=memberService.memberAdd(memberVO);
+		  
+		 if(result>0) {
+			 mv.setViewName("redirect:./memberList");
+		 }else {
+			 mv.addObject("result","add fail");
+			 mv.addObject("path","./memberAdd");
+			 
+			 mv.setViewName("common/result");
+		 }
 		
-		return "redirect:../";
+		return mv;
 	}
 	
 	
@@ -47,6 +60,21 @@ public class MemberController {
 	@RequestMapping(value = "memberPage", method = RequestMethod.GET )
 	public String memberPage() throws Exception{
 		return "member/memberPage";
+	}
+	
+	@RequestMapping(value = "memberList", method = RequestMethod.GET )
+	public ModelAndView memberList(ModelAndView mv, Pager pager) throws Exception{
+		System.out.println("kind : " + pager.getKind());
+		System.out.println("search : " + pager.getSearch());
+		
+		List<MemberVO> ar = memberService.memberList(pager);
+		System.out.println(pager.getTotalPage());
+		mv.addObject("list",ar);
+		mv.addObject("pager",pager);
+		mv.setViewName("member/memberList");
+		
+		return mv;
+		
 	}
 	
 	//update 진행중

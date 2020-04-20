@@ -25,15 +25,44 @@
  		select * from notice where num=#{num}
  	</select>
  	
- 	<select id="boardList" parameterType="java.util.Map"  resultType="com.naver.s5.notice.NoticeVO">
+ 	<sql id="search">
+ 		like '%'||#{search} ||'%'
+ 	</sql>
+ 	
+ 	<select id="boardList" parameterType="com.naver.s5.board.page.Pager"  resultType="com.naver.s5.notice.NoticeVO">
  		select * from
 			(select N.*, rownum R from
-				(select * from notice order by num desc) N)
+				(select * from notice where 
+				<choose>
+					<when test="kind =='bn'">
+						name
+					</when>
+					<when test="kind == 'bt'">
+						title					
+					</when>
+				 	<otherwise>
+				 		content
+				 	</otherwise>
+				</choose>
+				<include refid="search"></include> and num>=1 order by num desc) N)
 		where R between #{startRow} and #{lastRow}
  	</select>
  	<!-- 전체 글의 갯수 가지고 오기 -->
- 	<select id="boardCount" resultType="java.lang.Long">
- 		select count(num) from notice
+ 	
+ 	<select id="boardCount" parameterType="com.naver.s5.board.page.Pager"  resultType="java.lang.Long">
+ 		select count(num) from notice 
+ 		<where>
+ 			<if test="kind== 'bt'">
+ 				title <include refid="search"></include>
+ 			</if>
+ 			<if test="kind=='bn'">
+ 				name <include refid="search"></include>
+ 			</if> 
+ 			<if test="kind=='bc'">
+ 				content <include refid="search"></include>
+ 			</if>
+ 		</where>
+ 		
  	</select>
  	
  </mapper>

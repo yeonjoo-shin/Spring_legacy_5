@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.naver.s5.board.page.Pager;
+
 @Repository
 public class MemberDAO {
 	
@@ -30,6 +32,14 @@ public class MemberDAO {
 	//update
 	public int memberUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"memberUpdate",memberVO);
+	}
+	//memberList
+	public List<MemberVO> memberList(Pager pager) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"memberList",pager);
+	}
+	//membercount
+	public long memberCount(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"memberCount",pager);
 	}
 
 }

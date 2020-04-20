@@ -21,6 +21,7 @@
       <li><a href="${pageContext.request.contextPath}/point/pointList">Point</a></li>
       <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
        <li><a href="${pageContext.request.contextPath}/qna/qnaList">Qna</a></li>
+       <li><a href="${pageContext.request.contextPath}/member/memberList">MemeberList</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
     <c:if test="${empty member}">
@@ -39,8 +40,7 @@
 <div class="container">
  
 </div>
-<div class="container">
-  <h2>Carousel Example</h2>  
+<div class="container"> 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">

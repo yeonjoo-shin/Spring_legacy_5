@@ -26,7 +26,7 @@
 		select * from qna where num=#{num}
 	</select>
 	
-	<select id="boardList" parameterType="java.util.Map" resultType="com.naver.s5.qna.QnaVO">
+	<select id="boardList" parameterType="com.naver.s5.board.page.Pager" resultType="com.naver.s5.qna.QnaVO">
 		select * from
 			(select N.*, rownum R from
 				(select * from qna order by num desc) N )

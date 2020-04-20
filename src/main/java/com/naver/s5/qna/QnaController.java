@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.s5.board.BoardVO;
+import com.naver.s5.board.page.Pager;
 import com.naver.s5.notice.NoticeVO;
 
 @Controller
@@ -94,9 +95,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value ="qnaList",method = RequestMethod.GET)
-	public ModelAndView boardList(ModelAndView mv, @RequestParam(defaultValue = "1") int curPage) throws Exception{
+	public ModelAndView boardList(ModelAndView mv, Pager pager) throws Exception{
 		
-		List<BoardVO> ar = qnaService.boardList(curPage);
+		List<BoardVO> ar = qnaService.boardList(pager);
 		mv.addObject("list",ar);
 		mv.setViewName("board/boardList");
 		return mv;

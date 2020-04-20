@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.s5.board.BoardVO;
+import com.naver.s5.board.page.Pager;
 
 
 @Controller
@@ -77,9 +78,9 @@ public class NoticeController {
 	public ModelAndView boardWrite(NoticeVO noticeVO, ModelAndView mv) throws Exception{
 		int result=noticeService.boardWrite(noticeVO);
 		
-		if(result>0) {//�꽦怨� ->list濡�
+		if(result>0) {//
 			mv.setViewName("redirect:./noticeList");
-		}else {//�떎�뙣 ->alert �븯怨� list濡�..?
+		}else {//
 			mv.addObject("result","write fail");
 			mv.addObject("path","./noticeList");
 			
@@ -105,10 +106,15 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
-	public ModelAndView boardList(ModelAndView mv ,@RequestParam(defaultValue = "1") int curPage) throws Exception{		
-
-		List<BoardVO> ar = noticeService.boardList(curPage);
+	public ModelAndView boardList(ModelAndView mv ,Pager pager) throws Exception{		
+		System.out.println("kind : "+pager.getKind());
+		System.out.println("search : " +pager.getSearch());
+		
+		
+		List<BoardVO> ar = noticeService.boardList(pager);
+		System.out.println(pager.getTotalPage());
 		mv.addObject("list", ar);
+		mv.addObject("pager",pager);
 		mv.setViewName("board/boardList");
 		return mv;
 		

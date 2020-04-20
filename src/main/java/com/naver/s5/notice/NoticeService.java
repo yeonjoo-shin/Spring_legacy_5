@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.naver.s5.board.BoardService;
 import com.naver.s5.board.BoardVO;
+import com.naver.s5.board.page.Pager;
 
 @Service
 public class NoticeService implements BoardService {
@@ -17,28 +18,15 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 	
 	@Override
-	public List<BoardVO> boardList(int curPage) throws Exception {
-		//--------10개씩 가지고 오기----------------------
-		int startRow =(curPage-1)*10+1;
-		int lastRow = curPage*10;
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public List<BoardVO> boardList(Pager pager) throws Exception {		
+		pager.makeRow(); //startrow, lastrow 계산한 메서드
 		
-		map.put("startRow", startRow);
-		map.put("lastRow",lastRow);
+		long totalCount = noticeDAO.boardCount(pager);//전체글의 갯수 가지고오기
+		pager.makePage(totalCount);//totalcount 넘겨주기
+		
 		//------------------------------
-		//1. 총 글의 갯수
-		long totalCount =  noticeDAO.boardCount();
-		System.out.println("totalcount : "+totalCount);
-		//2. 총 페이지의 갯수
-		long totalPage = totalCount/10;
-		if(totalPage%10 !=0) {
-			totalPage++;
-		}
 		
-		System.out.println("totalPage : "+totalPage);
-		
-		
-		return noticeDAO.boardList(map);
+		return noticeDAO.boardList(pager);
 	}
 
 	@Override
@@ -61,5 +49,7 @@ public class NoticeService implements BoardService {
 	public int boardDelete(long num) throws Exception {
 		return noticeDAO.boardDelete(num);
 	}
+	
+	
 
 }

@@ -20,22 +20,22 @@
       <label for="Id">ID:</label>
       <input type="text" class="form-control" id="id" placeholder="Enter ID" name="id" >
     </div>
-    
+    <!--  
     <div class="form-group">
       <label for="Pwd">PW:</label>
       <input type="password" class="form-control" id="pw" placeholder="Enter PW" name="upw" >
     </div>
-    
+    -->
     <div class="form-group">
       <label for="Name">Name:</label>
       <input type="text" class="form-control" id="name" placeholder="Enter Name" name="uname" >
     </div>
-    
+     <!-- 
      <div class="form-group">
       <label for="Age">Age:</label>
       <input type="text" class="form-control" id="age" placeholder="Enter Age" name="age" >
     </div>
-    
+    -->
      <div class="form-group">
       <label for="Email">email:</label>
       <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email" >

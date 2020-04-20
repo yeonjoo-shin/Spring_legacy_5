@@ -20,4 +20,49 @@
 	<update id="memberUpdate" parameterType="com.naver.s5.member.MemberVO">
 		UPDATE member set id=#{id},upw=#{upw},uname=#{uname},age=#{age},email=#{email},phone=#{phone} where id=#{id}
 	</update>
+	
+	<sql id="search">
+		like '%'||#{search}||'%'
+	</sql>
+	
+	<select id="memberList" parameterType="com.naver.s5.member.page.Pager" resultType="com.naver.s5.member.MemberVO">
+	select * from
+			(select N.*, rownum R from
+				(select * from member where
+			<choose>
+				<when test="kind=='bi'">
+					id
+				</when>
+				<when test="kind=='bn'">
+					uname
+				</when>	
+				<when test="kind=='bp'">
+					phone
+				</when>	
+				<otherwise>
+					email
+				</otherwise>
+			</choose>
+			<include refid="search"></include>) N)
+		where R between #{startRow} and #{lastRow}
+	</select>
+	
+	<!-- 전체 글의 갯수 가지고 오기 -->
+	<select id="memberCount" parameterType="com.naver.s5.member.page.Pager"  resultType="java.lang.Long">
+		select count(rownum) from member
+		<where>
+			<if test="kind=='bi'">
+				id <include refid="search"></include>
+			</if>
+			<if test="kind=='bn'">
+				uname <include refid="search"></include>
+			</if>
+			<if test="kind=='bp'">
+				phone <include refid="search"></include>
+			</if>
+			<if test="kind=='be'">
+				email <include refid="search"></include>
+			</if>
+		</where>
+	</select>
 </mapper>

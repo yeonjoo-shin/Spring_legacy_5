@@ -1,7 +1,11 @@
 package com.naver.s5.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.naver.s5.board.page.Pager;
 
 @Service
 public class MemberService {
@@ -19,6 +23,14 @@ public class MemberService {
 	}
 	public int memberUpdate(MemberVO memberVO) throws Exception{
 		return memberDAO.memberUpdate(memberVO);
+	}
+	public List<MemberVO> memberList(Pager pager) throws Exception{
+		pager.makeRow();
+		
+		long totalCount =  memberDAO.memberCount(pager);
+		pager.makePage(totalCount);
+
+		return memberDAO.memberList(pager);
 	}
 	
 }
