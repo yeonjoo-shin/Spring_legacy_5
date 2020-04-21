@@ -10,32 +10,32 @@
  
 </head>
 <body>
-	<c:import url="../template/header.jsp"></c:import>
+	<c:import url="../template/header_sub.jsp"></c:import>
 	
 	<div class="container">
   <h2>Join Input</h2>
-  <form action="./memberJoin" method="post">
+  <form action="./memberJoin" method="post" enctype="multipart/form-data">
   
     <div class="form-group">
       <label for="Id">ID:</label>
       <input type="text" class="form-control" id="id" placeholder="Enter ID" name="id" >
     </div>
-    <!--  
+    
     <div class="form-group">
       <label for="Pwd">PW:</label>
       <input type="password" class="form-control" id="pw" placeholder="Enter PW" name="upw" >
     </div>
-    -->
+   
     <div class="form-group">
       <label for="Name">Name:</label>
       <input type="text" class="form-control" id="name" placeholder="Enter Name" name="uname" >
     </div>
-     <!-- 
+    
      <div class="form-group">
       <label for="Age">Age:</label>
       <input type="text" class="form-control" id="age" placeholder="Enter Age" name="age" >
     </div>
-    -->
+   
      <div class="form-group">
       <label for="Email">email:</label>
       <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email" >
@@ -45,6 +45,12 @@
       <label for="Phone">phone:</label>
       <input type="text" class="form-control" id="phone" placeholder="Enter Phone" name="phone" >
     </div>
+    
+    <div class="form-group">
+      <label for="pic">Avatar:</label>
+      <input type="file" class="form-control" id="pic" placeholder="Enter pic" name="avatar" >
+    </div>
+   
     
     <button type="submit" class="btn btn-default">Submit</button>
   </form>

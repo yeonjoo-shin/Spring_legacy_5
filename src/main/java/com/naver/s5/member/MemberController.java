@@ -2,8 +2,16 @@ package com.naver.s5.member;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,13 +26,15 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@RequestMapping(value = "memberJoin" ,  method = RequestMethod.GET)
-	public String memberAdd(MemberVO memberVO ) throws Exception{		
+	public String memberAdd(MemberVO memberVO ,String remember) throws Exception{
+		
 		return "member/memberJoin";
 	}
 	
 	@RequestMapping(value = "memberJoin" ,  method = RequestMethod.POST)
-	public ModelAndView memberAdd2(MemberVO memberVO,ModelAndView mv ) throws Exception{
-		 int result=memberService.memberAdd(memberVO);
+	public ModelAndView memberAdd2(MemberVO memberVO,ModelAndView mv ,String avatar) throws Exception{
+		
+		int result=memberService.memberAdd(memberVO);
 		  
 		 if(result>0) {
 			 mv.setViewName("redirect:./memberList");
@@ -40,13 +50,43 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "memberLogin",  method = RequestMethod.GET)
-	public String memberLogin(MemberVO memberVO)throws Exception{
-
+	public String memberLogin(@CookieValue(value = "cId", required = false) String cId , Model model)throws Exception{
+		System.out.println(cId);
+		//model.addAttribute("cId",cId);
 		return "member/memberLogin";
 	}
 	@RequestMapping(value = "memberLogin",  method = RequestMethod.POST)
-	public String memberLogin2(MemberVO memberVO)throws Exception{
-		memberService.memberLogin(memberVO);
+	public ModelAndView memberLogin2(MemberVO memberVO, HttpSession session ,ModelAndView mv ,String remember, HttpServletResponse response)throws Exception{
+		Cookie cookie = new Cookie("cId", "");
+		
+		if(remember != null) {
+			//cookie = new Cookie("cId", memberVO.getId());
+			cookie.setValue(memberVO.getId());
+		}
+		
+		//cookie.setMaxAge(0);//쿠키 유지 시간
+		response.addCookie(cookie);
+				
+		System.out.println("remember : " + remember);
+		memberVO = memberService.memberLogin(memberVO);				
+		
+		if(memberVO !=null) {
+			session.setAttribute("member", memberVO);
+			
+			mv.setViewName("redirect:../");
+		}else {
+			mv.addObject("result","login fail");
+			mv.addObject("path","./memberJoin");
+			
+			mv.setViewName("common/result");
+		}
+		
+		
+		return mv;
+	}
+	@RequestMapping(value = "memberLogout" )
+	public String memberLogout(HttpSession session) throws Exception{
+		session.invalidate();
 		return "redirect:../";
 	}
 	

@@ -9,7 +9,7 @@
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-<c:import url="../template/header.jsp"></c:import>
+<c:import url="../template/header_sub.jsp"></c:import>
 
 <div class="container">
 
@@ -70,11 +70,27 @@
 			</ul>
 		</div>
 		
+		<c:catch>
+		<c:choose>
+			<c:when test="${board eq 'notice'}">
+				<c:if test="${member.id eq 'admin'}">
+					<div>
+						<a href="./${board}Write" class="btn btn-danger">write</a>
+					</div>
+				
+				</c:if>
+			</c:when>
+			<c:otherwise>
+				<c:if test="${not empty member}">
+					<div>
+						<a href="./${board}Write" class="btn btn-danger">write</a>
+					</div>
+				</c:if>
+			</c:otherwise>
+		</c:choose>
+		</c:catch>
 		
-		<div>
-			<a href="./${board}Write" class="btn btn-danger">write</a>
-		</div>
-	
+		
 	</div>
 
 </div>
