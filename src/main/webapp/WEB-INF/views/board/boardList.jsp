@@ -15,7 +15,7 @@
 
 	<div class="row">
 	<h1>${board} List</h1>
-		 <form class="col-xs-6" action="./${board}List">
+		 <form class="col-xs-4" action="./${board}List">
 		    <div class="input-group" >
 		    	<select class="form-control" id="sel1" name="kind">
 				    <option value="bt">Title</option>
@@ -41,7 +41,14 @@
 		<c:forEach items="${list}" var="vo"> <!-- list 에서 하나꺼내서  vo에 넣어서 돌리기 -->
 		<tr>
 			<td>${vo.num}</td>
-			<td><a href="./${board}Select?num=${vo.num}"> ${vo.title }</a></td>
+			<td>
+			<c:catch>
+			<c:forEach begin="1" end="${vo.depth}">
+			 	--
+			 	<!-- &nbsp;&nbsp; //스페이스바역할 -->
+			</c:forEach>
+			</c:catch>
+			<a href="./${board}Select?num=${vo.num}"> ${vo.title }</a></td>
 			<td>${vo.name }</td>
 			<td>${vo.ddate }</td>
 			<td>${vo.hit}</td>
@@ -66,7 +73,6 @@
 		
 		<div>
 			<a href="./${board}Write" class="btn btn-danger">write</a>
-		
 		</div>
 	
 	</div>

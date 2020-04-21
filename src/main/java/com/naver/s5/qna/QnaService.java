@@ -18,6 +18,16 @@ public class QnaService implements BoardService {
 	@Autowired
 	private QnaDAO qnaDAO;
 
+	
+	public int boardReply(BoardVO boardVO) throws Exception{
+		int result =  qnaDAO.boardReplyUpdate(boardVO);
+		result = qnaDAO.boardReply(boardVO);
+		
+		return result;
+	}
+	
+	
+	
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {
 		

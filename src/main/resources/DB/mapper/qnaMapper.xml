@@ -61,5 +61,22 @@
 		<include refid="search"></include>
 	</select> 
 	
+	<update id="boardReplyUpdate" parameterType="QnaVO">
+		update qna set step=step+1 where 
+		ref = (select ref from qna where num=#{num})
+		and step > (select step from qna where num=#{num})
+	</update>
+	
+	<insert id="boardReply" parameterType="QnaVO">
+		insert into qna values(board_seq.nextval,#{title},#{name},sysdate,0,
+			(select ref from qna where num=#{num}),
+			(select step from qna where num=#{num})+1,
+			(select depth from qna where num=#{num})+1,
+		#{content})
+	</insert>
+	
+	
+	
+	
 	
 </mapper>
