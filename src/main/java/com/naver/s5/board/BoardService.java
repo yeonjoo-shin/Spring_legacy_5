@@ -2,7 +2,7 @@ package com.naver.s5.board;
 
 import java.util.List;
 
-import com.naver.s5.board.page.Pager;
+import com.naver.s5.util.Pager;
 
 public interface BoardService {
 	//List

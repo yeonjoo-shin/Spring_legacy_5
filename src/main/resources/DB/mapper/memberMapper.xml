@@ -5,19 +5,19 @@
   
 <mapper namespace="com.naver.s5.member.MemberDAO">
 
-	<insert id="memberAdd" parameterType="com.naver.s5.member.MemberVO">
+	<insert id="memberAdd" parameterType="MemberVO">
 		insert into member values(#{id},#{upw},#{uname},#{age},#{email},#{phone})
 	</insert>
 	
-	<select id="memberLogin" parameterType="com.naver.s5.member.MemberVO" resultType="com.naver.s5.member.MemberVO" >
+	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO" >
 		select * from member where id=#{id} and upw=#{upw}
 	</select>
 
-	<delete id="memberDelete" parameterType="com.naver.s5.member.MemberVO">
+	<delete id="memberDelete" parameterType="MemberVO">
 		delete member where id=#{id}
 	</delete>
 	
-	<update id="memberUpdate" parameterType="com.naver.s5.member.MemberVO">
+	<update id="memberUpdate" parameterType="MemberVO">
 		UPDATE member set id=#{id},upw=#{upw},uname=#{uname},age=#{age},email=#{email},phone=#{phone} where id=#{id}
 	</update>
 	
@@ -25,7 +25,7 @@
 		like '%'||#{search}||'%'
 	</sql>
 	
-	<select id="memberList" parameterType="com.naver.s5.member.page.Pager" resultType="com.naver.s5.member.MemberVO">
+	<select id="memberList" parameterType="Pager" resultType="MemberVO">
 	select * from
 			(select N.*, rownum R from
 				(select * from member where
@@ -48,7 +48,7 @@
 	</select>
 	
 	<!-- 전체 글의 갯수 가지고 오기 -->
-	<select id="memberCount" parameterType="com.naver.s5.member.page.Pager"  resultType="java.lang.Long">
+	<select id="memberCount" parameterType="Pager"  resultType="Long">
 		select count(rownum) from member
 		<where>
 			<if test="kind=='bi'">

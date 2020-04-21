@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.naver.s5.board.page.Pager;
+import com.naver.s5.util.Pager;
 
 @Repository
 public class MemberDAO {

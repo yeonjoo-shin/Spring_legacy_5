@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.naver.s5.board.BoardDAO;
 import com.naver.s5.board.BoardVO;
-import com.naver.s5.board.page.Pager;
+import com.naver.s5.util.Pager;
 
 @Repository
 public class QnaDAO implements BoardDAO {

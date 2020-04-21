@@ -5,15 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.s5.board.BoardVO;
-import com.naver.s5.board.page.Pager;
 import com.naver.s5.notice.NoticeVO;
+import com.naver.s5.util.Pager;
 
 @Controller
 @RequestMapping("/qna/**")
@@ -58,7 +60,7 @@ public class QnaController {
 		}else {
 			path="redirect:./qnaSelect?num="+qnaVO.getNum();
 		}
-		return path;
+			return path;
 	}
 	
 	
@@ -94,15 +96,26 @@ public class QnaController {
 		 return mv;
 	}
 	
-	@RequestMapping(value ="qnaList",method = RequestMethod.GET)
+	@GetMapping("qnaList") 
 	public ModelAndView boardList(ModelAndView mv, Pager pager) throws Exception{
 		
 		List<BoardVO> ar = qnaService.boardList(pager);
 		mv.addObject("list",ar);
+		mv.addObject("pager",pager);
 		mv.setViewName("board/boardList");
 		return mv;
 	}
-	
+	@GetMapping("qnaReply")
+	public ModelAndView boardReply(ModelAndView mv, long num) throws Exception{
+		mv.addObject("num",num);//부모의 글번호
+		mv.setViewName("board/boardReply");
+		return mv;
+	}
+	@PostMapping("qnaReply")
+	public ModelAndView boardReply(ModelAndView mv, QnaVO qnaVO) throws Exception{
+		
+		return mv;
+	}
 
 	
 }

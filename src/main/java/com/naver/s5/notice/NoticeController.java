@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.s5.board.BoardVO;
-import com.naver.s5.board.page.Pager;
+import com.naver.s5.util.Pager;
 
 
 @Controller

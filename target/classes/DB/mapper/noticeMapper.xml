@@ -5,23 +5,23 @@
   
  <mapper namespace="com.naver.s5.notice.NoticeDAO">
 
- 	<insert id="boardWrite" parameterType="com.naver.s5.notice.NoticeVO">
+ 	<insert id="boardWrite" parameterType="NoticeVO">
  		insert into notice values(board_seq.nextval,#{title},#{name},sysdate,0,#{content})
  	</insert>
  	
- 	<delete id="boardDelete" parameterType="java.lang.Long"><!-- long 타입 -->
+ 	<delete id="boardDelete" parameterType="Long"><!-- long 타입 -->
  		delete notice where num=#{num} <!-- 넘겨줄때의 변수명 입력 -->
  	</delete>
  	
- 	<update id="boardUpdate" parameterType="com.naver.s5.notice.NoticeVO">
+ 	<update id="boardUpdate" parameterType="NoticeVO">
  		UPDATE notice set title=#{title}, content=#{content} where num=#{num}
  	</update>
  	
- 	<update id="hitUpdate" parameterType="java.lang.Long">
+ 	<update id="hitUpdate" parameterType="Long">
  		UPDATE notice set hit=hit+1 where num=#{num}
  	</update>
  	
- 	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.naver.s5.notice.NoticeVO">
+ 	<select id="boardSelect" parameterType="Long" resultType="NoticeVO">
  		select * from notice where num=#{num}
  	</select>
  	
@@ -29,7 +29,7 @@
  		like '%'||#{search} ||'%'
  	</sql>
  	
- 	<select id="boardList" parameterType="com.naver.s5.board.page.Pager"  resultType="com.naver.s5.notice.NoticeVO">
+ 	<select id="boardList" parameterType="Pager"  resultType="NoticeVO">
  		select * from
 			(select N.*, rownum R from
 				(select * from notice where 
@@ -49,7 +49,7 @@
  	</select>
  	<!-- 전체 글의 갯수 가지고 오기 -->
  	
- 	<select id="boardCount" parameterType="com.naver.s5.board.page.Pager"  resultType="java.lang.Long">
+ 	<select id="boardCount" parameterType="Pager"  resultType="Long">
  		select count(num) from notice 
  		<where>
  			<if test="kind== 'bt'">

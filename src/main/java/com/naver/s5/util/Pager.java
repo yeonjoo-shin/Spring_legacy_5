@@ -1,4 +1,4 @@
-package com.naver.s5.board.page;
+package com.naver.s5.util;
 
 public class Pager {
 	//파라미터로 받아올 curpage 받기
