@@ -10,9 +10,9 @@
 </head>
 <body>
 	
-<c:import url="../template/header.jsp"></c:import>
+<c:import url="../template/header_sub.jsp"></c:import>
 	<div class="container">
-  <h2>Join Input</h2>
+  <h2>MY PAGE</h2>
   
   <form action="./memberPage" method="post">
   
@@ -46,7 +46,7 @@
     	<a href="./fileDelete">FileDelete</a>
     </div>
     
-  	<img alt="" src="../resources/memberUpload/${file.fileName}">
+  	<img alt="" src="../resources/memberUpload/${member.memberFileVO.fileName}">
   </form>
   
    <button class="btn btn-primary" id="up" > Update </button>
