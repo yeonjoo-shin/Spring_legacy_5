@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.s5.board.BoardVO;
+import com.naver.s5.member.memberFile.MemberFileVO;
 import com.naver.s5.util.Pager;
 
 @Controller
@@ -32,31 +35,30 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberJoin" ,  method = RequestMethod.POST)
-	public ModelAndView memberAdd2(MemberVO memberVO,ModelAndView mv ,String avatar) throws Exception{
+	public ModelAndView memberAdd(MemberVO memberVO, ModelAndView mv , MultipartFile avatar,HttpSession session) throws Exception{//jsp파라미터 이름과 동일한 이름의 avatar를 변수로 해야함.			
 		
-		int result=memberService.memberAdd(memberVO);
-		  
+		int result=memberService.memberAdd(memberVO,avatar,session);
+		String msg ="Member Join Fail";
 		 if(result>0) {
-			 mv.setViewName("redirect:./memberList");
-		 }else {
-			 mv.addObject("result","add fail");
-			 mv.addObject("path","./memberAdd");
+			msg="Member join success";
+		 }
+			 mv.addObject("result",msg);
+			 mv.addObject("path","../");
 			 
 			 mv.setViewName("common/result");
-		 }
-		
-		return mv;
+			 
+			 return mv;
+	
 	}
 	
 	
 	@RequestMapping(value = "memberLogin",  method = RequestMethod.GET)
 	public String memberLogin(@CookieValue(value = "cId", required = false) String cId , Model model)throws Exception{
-		System.out.println(cId);
 		//model.addAttribute("cId",cId);
 		return "member/memberLogin";
 	}
 	@RequestMapping(value = "memberLogin",  method = RequestMethod.POST)
-	public ModelAndView memberLogin2(MemberVO memberVO, HttpSession session ,ModelAndView mv ,String remember, HttpServletResponse response)throws Exception{
+	public ModelAndView memberLogin(MemberVO memberVO, HttpSession session ,ModelAndView mv ,String remember, HttpServletResponse response)throws Exception{
 		Cookie cookie = new Cookie("cId", "");
 		
 		if(remember != null) {
@@ -68,6 +70,7 @@ public class MemberController {
 		response.addCookie(cookie);
 				
 		System.out.println("remember : " + remember);
+		
 		memberVO = memberService.memberLogin(memberVO);				
 		
 		if(memberVO !=null) {
@@ -90,16 +93,31 @@ public class MemberController {
 		return "redirect:../";
 	}
 	
+	@GetMapping("fileDelete")
+	public String fileDelete(HttpSession session) throws Exception{
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
+		memberService.fileDelete(memberVO.getId(),session);
+		
+		return "redirect:./memberPage";
+	}
+	
 	
 	@RequestMapping(value ="memberDelete", method = RequestMethod.GET)
 	public String memberDelete(MemberVO memberVO) throws Exception{
 		memberService.memberDelete(memberVO);
+			
 		return "redirect:../";
 	}	
 	
 	@RequestMapping(value = "memberPage", method = RequestMethod.GET )
-	public String memberPage() throws Exception{
-		return "member/memberPage";
+	public void memberPage(HttpSession session, Model model) throws Exception{
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member"); //membervo 로그인 정보 가지고 와서
+		MemberFileVO memberFileVO = memberService.fileSelect(memberVO.getId()); //select한 id를 가지고 와서 memberfilevo에 넣어서
+		model.addAttribute("file",memberFileVO); //file이란 이름으로 filevo를 전달
+		
+		
 	}
 	
 	@RequestMapping(value = "memberList", method = RequestMethod.GET )

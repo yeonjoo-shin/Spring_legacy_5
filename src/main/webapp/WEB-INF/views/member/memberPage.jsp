@@ -42,7 +42,11 @@
       <input type="text" class="form-control" id="phone" placeholder="Enter Phone" name="phone" value="${member.phone}" >
     </div>
     
-  
+    <div>
+    	<a href="./fileDelete">FileDelete</a>
+    </div>
+    
+  	<img alt="" src="../resources/memberUpload/${file.fileName}">
   </form>
   
    <button class="btn btn-primary" id="up" > Update </button>

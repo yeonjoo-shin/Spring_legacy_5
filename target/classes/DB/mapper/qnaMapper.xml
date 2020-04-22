@@ -60,7 +60,7 @@
 		select count(num) from qna
 		<include refid="search"></include>
 	</select> 
-	
+	<!-- 답글 업데이트/ ref값이 부모의 ref와 같은지 &  stepdl 부모의 step보다 큰것들이 있는지를 업데이트 -->
 	<update id="boardReplyUpdate" parameterType="QnaVO">
 		update qna set step=step+1 where 
 		ref = (select ref from qna where num=#{num})

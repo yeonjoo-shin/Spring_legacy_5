@@ -43,6 +43,12 @@
     </div>
     
      <input type="submit" class="btn btn-primary" id="up" > 
+     
+      <div class="form-group">
+      <label for="avatar">Avatar:</label>
+      <input type="text" class="form-control" id="avatar" placeholder="Enter avatar" name="avatar" value="${member.age}">
+    </div>
+     
   </form>
   
    <script type="text/javascript">
