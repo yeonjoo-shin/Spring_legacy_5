@@ -7,13 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
-<c:import url="../template/header.jsp"></c:import>
-	<h1>${board}page</h1>
-	<div class="container">
+<c:import url="../template/header_sub.jsp"></c:import>
+	
+<div class="container">
 
 <form action="./${board}Update" method="post">
+	<h1>${board} Update Page</h1>
   	<input type="hidden" name="num" value="${vo.num}">
      <div class="form-group">
       <label for="title">title:</label>
@@ -35,7 +37,12 @@
     </form>
 		</div>
 	
-	</div>
+<script type="text/javascript">
+	$("#content").summernote({
+		height :400
+	});
+
+</script>
 	
 	
 </body>

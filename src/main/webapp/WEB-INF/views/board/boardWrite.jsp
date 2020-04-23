@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
 <c:import url="../template/header_sub.jsp"></c:import>
@@ -28,7 +29,7 @@
     
      <div class="form-group">
       <label for="content">Content:</label>
-      <input type="text" class="form-control" id="content" placeholder="Enter Content" name="content"  >
+      <textarea rows="20" cols=""  class="form-control" id="content" placeholder="Enter Content" name="content"  ></textarea>
     </div>
     
     <div class="form-group">
@@ -40,8 +41,15 @@
     <input type="submit" id="btn" class="btn btn-default" value="Write">
     
     </form>
-		</div>
-	
+</div>
+
+<script type="text/javascript">
+	//$("선택자"). action();
+	$("#content").summernote({
+		height : 400
+	});
+
+</script>
 
 		
 	

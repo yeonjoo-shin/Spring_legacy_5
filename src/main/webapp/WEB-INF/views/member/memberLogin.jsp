@@ -11,7 +11,7 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 	<div class="container">
-  <h2>Join Input</h2>
+  <h1>Login</h1>
   <form action="./memberLogin" method="post">
   
    <div class="form-group">

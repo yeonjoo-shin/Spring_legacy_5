@@ -36,7 +36,6 @@ public class NoticeDAO implements BoardDAO {
 
 	@Override
 	public BoardVO boardSelect(long num) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NAMESPACE+"boardSelect", num);
 	}
 

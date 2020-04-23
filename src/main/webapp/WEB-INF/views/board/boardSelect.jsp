@@ -9,15 +9,29 @@
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-<c:import url="../template/header.jsp"></c:import>
+<c:import url="../template/header_sub.jsp"></c:import>
 <div class="container"> 
-<div class="row">
-	<h1> title :  ${vo.title }</h1>
-	<h1> writer : ${vo.name }</h1>
-	<h1> content  : ${vo.content } </h1>
-
+<div class="panel panel-info">
+	<div class="panel-heading">Title</div>
+	<div class="panel-body"> ${vo.title }</div>
+	<div class="panel-heading"> Writer</div> 
+	<div class="panel-body">${vo.name }</div>
+	<div class="panel-heading"> Content </div> 
+	<div class="panel-body"> ${vo.content } </div> 
 </div>
 
+
+
+<div>
+	<c:forEach items="${vo.boardFileVOs}" var="file">
+		<div>
+			<a href="../boardFile/fileDown?fileNum=${file.fileNum}&board=${file.board}">${file.oriName}</a>
+		</div>
+	</c:forEach>
+	<div>
+		<img src="">
+	</div>
+</div>
 
 <div>
 	<a href="./${board}Update?num=${vo.num}" class="btn btn-danger">Update</a>

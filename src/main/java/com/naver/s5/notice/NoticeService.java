@@ -49,7 +49,7 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int boardWrite(BoardVO boardVO,MultipartFile [] files) throws Exception {
-		String path = session.getServletContext().getRealPath("/resources/uploadNotice");
+		String path = session.getServletContext().getRealPath("/resources/uploadnotice");
 		System.out.println(path);
 		
 		//sequence 번호 받기(글 번호받기)

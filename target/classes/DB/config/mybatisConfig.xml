@@ -14,6 +14,7 @@
   		<typeAlias type="com.naver.s5.member.memberFile.MemberFileVO" alias="MemberFileVO"/>
   		<typeAlias type="java.lang.String" alias="String"/>
   		<typeAlias type="com.naver.s5.board.file.BoardFileVO" alias="BoardFileVO"/>
+  		<typeAlias type="java.util.List" alias="List"/>
   	</typeAliases>
   	
   </configuration>
