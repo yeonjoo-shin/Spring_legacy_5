@@ -111,11 +111,11 @@ public class MemberController {
 	}	
 	
 	@RequestMapping(value = "memberPage", method = RequestMethod.GET )
-	public void memberPage(HttpSession session, Model model) throws Exception{
+	public void memberPage(/*HttpSession session, Model model*/) throws Exception{
 		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member"); //membervo 로그인 정보 가지고 와서
-		MemberFileVO memberFileVO = memberService.fileSelect(memberVO.getId()); //select한 id를 가지고 와서 memberfilevo에 넣어서
-		model.addAttribute("file",memberFileVO); //file이란 이름으로 filevo를 전달
+//		MemberVO memberVO = (MemberVO)session.getAttribute("member"); //membervo 로그인 정보 가지고 와서
+//		MemberFileVO memberFileVO = memberService.fileSelect(memberVO.getId()); //select한 id를 가지고 와서 memberfilevo에 넣어서
+//		model.addAttribute("file",memberFileVO); //file이란 이름으로 filevo를 전달
 		
 		
 	}

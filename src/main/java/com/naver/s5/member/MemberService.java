@@ -22,6 +22,7 @@ public class MemberService {
 	@Autowired
 	private MemberFileDAO memberFileDAO;
 	
+	//join
 	public int memberAdd(MemberVO memberVO,MultipartFile avatar,HttpSession session) throws Exception{
 		//HDD에 저장 resources/memberUpload/
 		//1. 실제 경로 가지고오기
@@ -63,9 +64,10 @@ public class MemberService {
 		return memberDAO.memberList(pager);
 	}
 	
-	public MemberFileVO fileSelect(String id) throws Exception{
-		return memberFileDAO.fileSelect(id);
-	}
+//	public MemberFileVO fileSelect(String id) throws Exception{
+//		return memberFileDAO.fileSelect(id);
+//	}
+	
 	public int fileDelete(String id, HttpSession session) throws Exception{
 		MemberFileVO memberFileVO = memberFileDAO.fileSelect(id);
 		
