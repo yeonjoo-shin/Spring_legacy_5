@@ -27,7 +27,7 @@ public class QnaService implements BoardService {
 	private FileSaver fileSaver;
 	@Autowired
 	private HttpSession session;
-	//@Autowired
+	@Autowired
 	private BoardFileDAO boardFileDAO; 
 
 	
