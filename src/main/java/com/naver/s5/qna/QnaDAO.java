@@ -21,6 +21,11 @@ public class QnaDAO implements BoardDAO {
 	private SqlSession sqlSession;
 	private final String Namespace ="com.naver.s5.qna.QnaDAO.";
 	
+	
+	public long boardNum() throws Exception{
+		return sqlSession.selectOne(Namespace+"boardNum");
+	}
+	
 	public int boardReplyUpdate(BoardVO boardVO) throws Exception{
 		return sqlSession.update(Namespace+"boardReplyUpdate",boardVO);
 	}

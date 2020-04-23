@@ -69,7 +69,7 @@
 			</c:if>
 			</ul>
 		</div>
-		
+		<a href="./${board}Write" class="btn btn-danger">write</a>
 		<c:catch>
 		<c:choose>
 			<c:when test="${board eq 'notice'}">

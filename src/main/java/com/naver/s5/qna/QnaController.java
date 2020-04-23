@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.s5.board.BoardVO;
@@ -65,14 +66,18 @@ public class QnaController {
 	
 	
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
-	public String boardWrite() throws Exception{
+	public String boardWrite() throws Exception{	
 		return "board/boardWrite";
 	}
 	
 	
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
-	public ModelAndView boardWrite(QnaVO qnaVO,ModelAndView mv) throws Exception{
-		int result = qnaService.boardWrite(qnaVO);
+	public ModelAndView boardWrite(QnaVO qnaVO,ModelAndView mv,MultipartFile[] files) throws Exception{
+		for(MultipartFile file :  files) {
+			System.out.println(file.getOriginalFilename());
+		}
+		
+		int result = qnaService.boardWrite(qnaVO,files);
 		
 		if(result>0) {
 			mv.setViewName("redirect:./qnaList");

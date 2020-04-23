@@ -13,6 +13,7 @@
   		<typeAlias type="com.naver.s5.util.Pager" alias="Pager"/>
   		<typeAlias type="com.naver.s5.member.memberFile.MemberFileVO" alias="MemberFileVO"/>
   		<typeAlias type="java.lang.String" alias="String"/>
+  		<typeAlias type="com.naver.s5.board.file.BoardFileVO" alias="BoardFileVO"/>
   	</typeAliases>
   	
   </configuration>

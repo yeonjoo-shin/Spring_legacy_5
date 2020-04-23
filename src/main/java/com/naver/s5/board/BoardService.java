@@ -2,6 +2,8 @@ package com.naver.s5.board;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.naver.s5.util.Pager;
 
 public interface BoardService {
@@ -10,7 +12,7 @@ public interface BoardService {
 	//select
 	public BoardVO boardSelect(long num) throws Exception;
 	//insert
-	public int boardWrite(BoardVO boardVO) throws Exception;
+	public int boardWrite(BoardVO boardVO,MultipartFile [] files) throws Exception;
 	//update
 	public int boardUpdate(BoardVO boardVO) throws Exception;
 	//delete
