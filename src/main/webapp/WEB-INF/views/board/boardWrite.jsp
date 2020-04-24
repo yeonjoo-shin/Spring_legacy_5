@@ -15,7 +15,7 @@
 
 <div class="container">
 <h1>${borad}write </h1>
-<form action="./${board}Write" method="post" enctype="multipart/form-data">
+<form action="./${board}Write" id="frm" method="post" enctype="multipart/form-data">
   
      <div class="form-group">
       <label for="title">Title:</label>
@@ -24,7 +24,7 @@
     
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" >
+      <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" value="${member.id}" readonly="readonly">
     </div>
     
      <div class="form-group">
@@ -32,23 +32,17 @@
       <textarea rows="20" cols=""  class="form-control" id="content" placeholder="Enter Content" name="content"  ></textarea>
     </div>
     
-    <div class="form-group">
-      <label for="files">File:</label>
-      <input type="file" class="form-control"  name="files"  >
-      <input type="file" class="form-control"  name="files"  >
+    <input type="button" id="add" class="btn btn-info" value="AddFile">
+    <div id="file">
+	   
     </div>
-    
-    <input type="submit" id="btn" class="btn btn-default" value="Write">
+   
+    <input type="button" id="btn" class="btn btn-default" value="Write">
     
     </form>
 </div>
 
-<script type="text/javascript">
-	//$("선택자"). action();
-	$("#content").summernote({
-		height : 400
-	});
-
+<script type="text/javascript" src="../resources/js/boardForm.js">
 </script>
 
 		

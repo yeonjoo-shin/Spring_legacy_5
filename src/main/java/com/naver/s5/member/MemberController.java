@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,6 +50,21 @@ public class MemberController {
 			 
 			 return mv;
 	
+	}
+	
+	@PostMapping("memberIdCheck")
+	public ModelAndView memberIdCheck(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		memberVO = memberService.memberIdCheck(memberVO);
+		//null-> 가입 가능 1
+		//null X -> 중복 0
+		int result =0;
+		if(memberVO==null) {
+			result =1;
+		}
+		mv.addObject("result",result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
 	}
 	
 	

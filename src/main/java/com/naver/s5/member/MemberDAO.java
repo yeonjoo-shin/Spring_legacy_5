@@ -41,5 +41,9 @@ public class MemberDAO {
 	public long memberCount(Pager pager) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"memberCount",pager);
 	}
+	//memberIdCheck
+	public MemberVO memberIdCheck(MemberVO memberVO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"memberIdCheck",memberVO);
+	}
 
 }

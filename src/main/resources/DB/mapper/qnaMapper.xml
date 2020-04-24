@@ -5,6 +5,24 @@
   
   
 <mapper namespace="com.naver.s5.qna.QnaDAO">
+
+	<resultMap type="QnaVO" id="selectResult">
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="name" property="name"/>
+		<result column="content" property="content"/>
+		<result column="ddate" property="ddate"/>
+		<result column="hit" property="hit"/>
+		<collection property="boardFileVOs" javaType="List" ofType="BoardFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+			<result column="board" property="board"/>
+		
+		</collection>
+	</resultMap>
+
+
  	
 	<delete id="boardDelete" parameterType="Long">
 		delete qna where num=#{num}
@@ -19,8 +37,11 @@
 		update qna set hit=hit+1 where num=#{num}
 	</update>
 	
-	<select id="boardSelect" parameterType="Long" resultType="QnaVO">
-		select * from qna where num=#{num}
+	<select id="boardSelect" parameterType="Long" resultMap="selectResult">
+		select Q.*,F.*
+		 from qna Q left join boardFile F
+		 on (Q.num = F.num)
+		 where Q.num=#{num}
 	</select>
 	
  	

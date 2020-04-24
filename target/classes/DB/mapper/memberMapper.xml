@@ -18,6 +18,11 @@
 		</association>
 	</resultMap>
 	
+	
+	<select id="memberIdCheck" resultType="MemberVO" parameterType="MemberVO">
+		select id from member where id=#{id}
+	</select>	
+	
 	<insert id="memberAdd" parameterType="MemberVO">
 		insert into member values(#{id},#{upw},#{uname},#{age},#{email},#{phone})
 	</insert>

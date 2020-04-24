@@ -1,11 +1,26 @@
 package com.naver.s5.qna;
 
+import java.util.List;
+
 import com.naver.s5.board.BoardVO;
+import com.naver.s5.board.file.BoardFileVO;
 
 public class QnaVO extends BoardVO{
 	private long ref;
 	private long step;
 	private long depth;
+	
+	
+	private List<BoardFileVO> boardFileVOs;
+	
+
+	public List<BoardFileVO> getBoardFileVOs() {
+		return boardFileVOs;
+	}
+	public void setBoardFileVOs(List<BoardFileVO> boardFileVOs) {
+		this.boardFileVOs = boardFileVOs;
+	}
+	
 	
 	
 	public long getRef() {

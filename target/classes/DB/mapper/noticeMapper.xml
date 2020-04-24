@@ -46,7 +46,7 @@
  		select N.* ,F.*
 		from notice N left join boardFile F
 		on (N.num = F.num)
-		where N.num=#{num} and F.board=1
+		where N.num=#{num} 
  	</select>
  	
  	<sql id="search">

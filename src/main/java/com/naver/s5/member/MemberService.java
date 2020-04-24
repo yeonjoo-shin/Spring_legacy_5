@@ -76,9 +76,11 @@ public class MemberService {
 			String path=session.getServletContext().getRealPath("/resources/memberUpload");
 			result=fileSaver.deleteFile(memberFileVO.getFileName(), path);
 		}
-		
-		
 		return result;
+	}
+	//memberIdCheck
+	public MemberVO memberIdCheck(MemberVO memberVO) throws Exception{
+		return memberDAO.memberIdCheck(memberVO);
 	}
 	
 }

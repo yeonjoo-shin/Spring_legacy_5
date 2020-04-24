@@ -19,7 +19,7 @@
     <div class="form-group">
       <label for="Id">ID:</label>
       <input type="text" class="form-control" id="id" placeholder="Enter ID" name="id" >
-    </div>
+    </div>  
     
     <div class="form-group">
       <label for="Pwd">PW:</label>
@@ -55,7 +55,20 @@
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>
-	
+<script type="text/javascript">
+
+	$("#id").blur(function() {
+		var id = $("#id").val(); //입력된 아이디 꺼내오기
+		
+		$.post("./memberIdCheck",{id:id},function(data){
+			alert("중복입니다.");
+			
+		});
+	});
+
+
+
+</script>
 	
 	     
 
