@@ -1,5 +1,6 @@
 package com.naver.s5.member;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -52,6 +53,7 @@ public class MemberController {
 	
 	}
 	
+	//아이디 중복 확인 메서드
 	@PostMapping("memberIdCheck")
 	public ModelAndView memberIdCheck(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -120,11 +122,36 @@ public class MemberController {
 	
 	
 	@RequestMapping(value ="memberDelete", method = RequestMethod.GET)
-	public String memberDelete(MemberVO memberVO) throws Exception{
-		memberService.memberDelete(memberVO);
+	public ModelAndView memberDelete(ModelAndView mv,HttpSession session) throws Exception{
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		int result=memberService.memberDelete(memberVO);
+		if(result>0) {
+			session.invalidate();
+			mv.addObject("result", "Delete Success");
+			mv.addObject("path", "../");
+			mv.setViewName("common/result");
+		}else {
+			mv.addObject("result", "Delete Fail");
+			mv.addObject("path", "../");
+			mv.setViewName("common/result");
+		}
 			
-		return "redirect:../";
-	}	
+		return mv;
+	}
+	//체크박스 체크된 게시물을 지우기 위한 메서드(장바구니사용..?)
+	@GetMapping("memberDeletes")
+	public ModelAndView memberDeletes(String [] ids) throws Exception{
+		//배열을 list로 변환
+		ModelAndView mv = new ModelAndView();
+		List<String> list = Arrays.asList(ids);
+		int result=memberService.memberDeletes(list);
+		mv.addObject("result",result);
+		mv.setViewName("common/ajaxResult");
+		
+		System.out.println(result);
+		return mv;
+	}
+	
 	
 	@RequestMapping(value = "memberPage", method = RequestMethod.GET )
 	public void memberPage(/*HttpSession session, Model model*/) throws Exception{
@@ -150,17 +177,41 @@ public class MemberController {
 		return mv;
 		
 	}
+	@GetMapping("memberLists")
+	public ModelAndView memberLists(Pager pager)throws Exception{
+		ModelAndView mv= new ModelAndView();
+		List<MemberVO> ar = memberService.memberList(pager);
+		mv.addObject("list",ar);
+		mv.addObject("pager",pager);
+		mv.setViewName("member/memberLists");
+		return mv;
+	}
 	
-	//update 진행중
-//	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
-//	public String memberUpdate(MemberVO memberVO) throws Exception{
-//		return "member/memberUpdate";
-//	}
-//	
-//
-//	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
-//	public String memberUpdate2(MemberVO memberVO) throws Exception{
-//		return "redirect:../";
-//	}
+	
+	
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
+	public void memberUpdate(MemberVO memberVO) throws Exception{
+		
+	}
+	
+
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+	public ModelAndView memberUpdate2(MemberVO memberVO,ModelAndView mv, HttpSession session) throws Exception{
+		String id=((MemberVO) session.getAttribute("member")).getId();
+		memberVO.setId(id);
+		
+		int result = memberService.memberUpdate(memberVO);
+		
+		if(result>0) {
+			session.setAttribute("member", memberVO);
+			mv.setViewName("redirect:./memberPage");
+		}else {
+			 mv.addObject("result", "Update Fail");
+			 mv.addObject("path", "./memberPage");
+			 mv.setViewName("common/result");
+		}
+		
+		return mv;
+	}
 	
 }

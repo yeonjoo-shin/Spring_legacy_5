@@ -86,4 +86,21 @@
 			</if>
 		</where>
 	</select>
+	<!-- 체크박스에서 선택삭제 -->
+	<delete id="memberDeletes" parameterType="List">
+		delete member where id in
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

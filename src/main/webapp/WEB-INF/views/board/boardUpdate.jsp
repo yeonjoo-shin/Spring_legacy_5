@@ -16,7 +16,7 @@
 
 <form action="./${board}Update" method="post">
 	<h1>${board} Update Page</h1>
-  	<input type="hidden" name="num" value="${vo.num}">
+  	<input type="hidden" name="num" value="${vo.num}" >
      <div class="form-group">
       <label for="title">title:</label>
       <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title" value="${vo.title}">
@@ -29,17 +29,39 @@
     
      <div class="form-group">
       <label for="content">content:</label>
-      <textarea type="text" class="form-control" id="content" placeholder="Enter Content" name="content"  >${vo.content}</textarea>
+      <textarea  class="form-control" id="content" placeholder="Enter Content" name="content"  >${vo.content}</textarea>
+    </div>
+    
+    <div class="form-group">
+    <label for="files">Files:</label>
+    <c:forEach items="${vo.boardFileVOs}" var="fileVO">
+    	<p>${fileVO.oriName}<i id="${fileVO.fileNum}" class="glyphicon glyphicon-remove remove fileDelete"></i></p>
+    </c:forEach>
+    
     </div>
     
     <input type="submit" id="btn" class="btn btn-default" value="Write">
     
     </form>
-		</div>
+	</div>
 	
 <script type="text/javascript" >
 	$("#content").summernote({
 		height :400
+	});
+	
+	
+	$(".fileDelete").click(function() {
+		var s= $(this);
+		$.post("../boardFile/fileDelete",{fileNum:$(this).attr("id")},function(data){
+			
+			if(data.trim()>0){
+				s.parent().remove();
+				alert("success");
+			}else{
+				alert("File Delete Fail")
+			}
+		});
 	});
 
 </script>

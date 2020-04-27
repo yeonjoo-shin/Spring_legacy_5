@@ -60,10 +60,23 @@
 	$("#id").blur(function() {
 		var id = $("#id").val(); //입력된 아이디 꺼내오기
 		
-		$.post("./memberIdCheck",{id:id},function(data){
+		/*$.post("./memberIdCheck",{id:id},function(data){
 			alert("중복입니다.");
-			
+		});*/
+		$.ajax({
+			type: "post",//method 형식
+			url : "./memberIdCheck", //url 주소
+			data: {
+				id:id
+			},//parameter
+			success: function(data){
+				alert(data);
+			},
+			error:function(){
+				alert("중복입니다.");
+			}
 		});
+		
 	});
 
 

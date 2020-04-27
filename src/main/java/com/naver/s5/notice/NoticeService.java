@@ -59,6 +59,7 @@ public class NoticeService implements BoardService {
 		int result = noticeDAO.boardWrite(boardVO);
 		
 		for(MultipartFile file : files) {
+			if(file.getSize()>0) {
 			BoardFileVO boardFileVO = new BoardFileVO();
 			String fileName=fileSaver.saveByTransfer(file, path);
 			boardFileVO.setNum(boardVO.getNum());//글번호
@@ -66,6 +67,7 @@ public class NoticeService implements BoardService {
 			boardFileVO.setOriName(file.getOriginalFilename());
 			boardFileVO.setBoard(1);
 			boardFileDAO.fileInsert(boardFileVO);
+			}
 		}
 		
 		return result;

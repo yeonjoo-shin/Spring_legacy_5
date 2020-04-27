@@ -83,4 +83,9 @@ public class MemberService {
 		return memberDAO.memberIdCheck(memberVO);
 	}
 	
+	//memberDeletes
+	public int memberDeletes(List<String> list) throws Exception{
+		return memberDAO.memberDeletes(list);
+	}
+	
 }

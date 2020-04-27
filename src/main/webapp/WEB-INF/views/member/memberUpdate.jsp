@@ -42,13 +42,13 @@
       <input type="text" class="form-control" id="phone" placeholder="Enter Phone" name="phone" value="${member.phone}" >
     </div>
     
-     <input type="submit" class="btn btn-primary" id="up" > 
-     
+ 
       <div class="form-group">
       <label for="avatar">Avatar:</label>
-      <input type="text" class="form-control" id="avatar" placeholder="Enter avatar" name="avatar" value="${member.age}">
+      <input type="text" class="form-control" id="avatar" placeholder="Enter avatar" name="avatar" >
     </div>
-     
+    
+      <button type="submit" class="btn btn-primary" id="up" >Submit</button>
   </form>
   
    <script type="text/javascript">

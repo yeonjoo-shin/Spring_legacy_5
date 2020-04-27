@@ -12,4 +12,10 @@
  	<select id="fileSelect" parameterType="BoardFileVO" resultType="BoardFileVO">
  		select * from boardFile where fileNum=#{fileNum} and board=#{board}
  	</select>
+ 	
+ 	<delete id="fileDelete" parameterType="Long">
+ 		delete boardFile  where fileNum=#{fileNum}
+ 	</delete>
+ 	
+ 	
  </mapper>

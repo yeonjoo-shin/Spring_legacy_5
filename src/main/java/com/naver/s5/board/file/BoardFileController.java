@@ -1,8 +1,11 @@
 package com.naver.s5.board.file;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +22,15 @@ public class BoardFileController {
 		boardFileVO = boardFileService.fileSelect(boardFileVO);
 		mv.addObject("file",boardFileVO);
 		mv.setViewName("fileDown");
+		return mv;
+	}
+	@PostMapping("fileDelete")
+	public ModelAndView fileDelete(long fileNum)throws Exception{
+		ModelAndView mv = new ModelAndView();		
+		int result=boardFileService.fileDelete(fileNum);
+		mv.addObject("result",result);
+		mv.setViewName("common/ajaxResult");
+
 		return mv;
 	}
 
