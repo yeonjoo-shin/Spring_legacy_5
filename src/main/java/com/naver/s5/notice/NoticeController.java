@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,8 +55,13 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public String boardUpdate(NoticeVO noticeVO) throws Exception{
-			int result = noticeService.boardUpdate(noticeVO);
+	public String boardUpdate(NoticeVO noticeVO,Model model,MultipartFile [] files) throws Exception{		
+			for(MultipartFile file : files) {
+				System.out.println(file.getOriginalFilename());
+			}
+					
+			int result = noticeService.boardUpdate(noticeVO,files);
+			//model.addAttribute("size",noticeVO.getBoardFileVOs().size());
 			String path="";
 			
 			if(result>0) {

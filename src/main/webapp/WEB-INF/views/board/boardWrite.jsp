@@ -33,6 +33,7 @@
     </div>
     
     <input type="button" id="add" class="btn btn-info" value="AddFile">
+   
     <div id="file">
 	   
     </div>
@@ -41,11 +42,29 @@
     
     </form>
 </div>
-
-<script type="text/javascript" src="../resources/js/boardForm.js">
+<!--  
+<script type="text/javascript" src="../resources/js/boardForm.js">	
 </script>
-
-		
+-->	
+<script type="text/javascript">
+$("#content").summernote({
+	height : 400,
+	callbacks : {
+		onImageUpload : function(files) {
+			//console.log("upload");//이미지 업로드 했을때 제대로 작동하는지 확인
+			$.ajax({
+				type:"POST",
+				url : "../boardFile/fileInsert",
+				enctype : "multipart/form-data",
+				cache:false,
+				contentType:false,
+				processData:false,
+				success:function(imageName){}//저장한 이상한 이름 긴것을 보내줌
+			});
+		}
+	}
+});
+</script>
 	
 </body>
 </html>

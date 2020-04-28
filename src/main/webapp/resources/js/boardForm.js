@@ -5,6 +5,8 @@
 
 	var count = 1;
 	
+	
+	
 	$("#add").click(function(){
 		
 		if(count<6){
@@ -62,6 +64,11 @@
 	
 	
 	//$("선택자"). action();
-	$("#content").summernote({
-		height : 400
-	});
+//	$("#content").summernote({
+//		height : 400,
+//		callbacks : {
+//			onImageUpload : function(file) {
+//				console.log("upload");//이미지 업로드 했을때 제대로 작동하는지 확인
+//			}
+//		}
+//	});
