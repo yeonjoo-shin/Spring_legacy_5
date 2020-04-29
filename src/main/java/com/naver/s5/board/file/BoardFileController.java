@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -14,6 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class BoardFileController {
 	@Autowired
 	private BoardFileService boardFileService;
+	@PostMapping("fileInsert")
+	public ModelAndView fileInsert(MultipartFile files)throws Exception{
+		System.out.println(files.getOriginalFilename());//컨트롤로 까지 넘어오는지 확인
+		ModelAndView mv = new ModelAndView();
+		String fileName = boardFileService.fileInsert(files);
+		mv.addObject("result",fileName);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
 	
 	
 	@GetMapping("fileDown")
@@ -25,9 +35,9 @@ public class BoardFileController {
 		return mv;
 	}
 	@PostMapping("fileDelete")
-	public ModelAndView fileDelete(long fileNum)throws Exception{
+	public ModelAndView fileDelete(BoardFileVO boardFileVO)throws Exception{
 		ModelAndView mv = new ModelAndView();		
-		int result=boardFileService.fileDelete(fileNum);
+		int result=boardFileService.fileDelete(boardFileVO);
 		mv.addObject("result",result);
 		mv.setViewName("common/ajaxResult");
 

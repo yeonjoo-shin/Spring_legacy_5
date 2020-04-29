@@ -49,7 +49,7 @@
  		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
  			select board_seq.nextval from dual
  		</selectKey>
-		insert into qna values(#{num},#{title},#{name},sysdate,0,#{num},0,0,#{content})
+		insert into qna values(#{num},#{title},#{name},#{content},sysdate,#{num},0,0,0)
 	</insert>
  	
  	<sql id="search">

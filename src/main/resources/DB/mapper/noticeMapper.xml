@@ -27,7 +27,7 @@
 	</select>
 	
  	<insert id="boardWrite" parameterType="NoticeVO">
- 		insert into notice values(#{num},#{title},#{name},sysdate,0,#{content})
+ 		insert into notice values(#{num},#{title},#{name},#{content},sysdate,0)
  	</insert>
  	
  	<delete id="boardDelete" parameterType="Long"><!-- long 타입 -->

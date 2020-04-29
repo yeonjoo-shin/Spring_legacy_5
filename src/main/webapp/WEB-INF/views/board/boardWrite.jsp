@@ -39,10 +39,11 @@
    
     <input type="button" id="btn" class="btn btn-default" value="Write">
     
-    </form>
+</form>
 </div>
 
 <script type="text/javascript" src="../resources/js/boardForm.js">
+
 </script>
 
 		

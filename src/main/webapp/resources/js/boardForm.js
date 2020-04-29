@@ -21,7 +21,37 @@
 		count--;
 	});
 	
-	
+////////////////////////////////////
+	$("#content").summernote({
+	    height:400,
+	    callbacks: {
+	       onImageUpload: function(files,editor) {//editor-섬머노트 그 자체/files-업로드할 파일 정보(꺼내서 서버로 전송)
+	    	   
+	    	   	var formData = new FormData();//<form>태그같은 것
+	    	   	
+	    	   	formData.append('files',files[0]);//폼태그안에 정보 강제로 집어 넣기<input type="file" name="">(파리미터이름 'files',value files)
+	    	   
+	             $.ajax({
+	              type="POST",
+	              url:"../boardFile/fileInsert",
+	              data:formData,//파라미터이름과 벨류값이 들어잇는 것 자체를 가지고 오기
+	              enctype:"multipart/form-data",
+	              cache:false,
+	              contentType:false,
+	              processData:false,
+	              success:function(imageName){}
+	              	imageName = imageName.trim();
+	              	$(editor).summernote('editor.insertImage',imageName);
+	              //하드디스크에 저장 후 > 저장된 이름 > 이쪽으로 받아줄거임 > img태그 써서 경로명 붙일 거임
+	                
+	             });
+	             
+	       }
+	    }
+	    
+	 });
+
+	////////////////////////////////
 
 
 	$("#btn").click(function(){
@@ -61,7 +91,7 @@
 	
 	
 	
-	//$("선택자"). action();
-	$("#content").summernote({
-		height : 400
-	});
+//	//$("선택자"). action();
+//	$("#content").summernote({
+//		height : 400
+//	});
