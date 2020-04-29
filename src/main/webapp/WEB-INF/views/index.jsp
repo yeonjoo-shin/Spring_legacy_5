@@ -28,7 +28,10 @@
 	 -->
 	<script type="text/javascript">
 		$("#btn2").click(function() {
-			
+			$.get("https://api.manana.kr/exchange/rate.json?base=KRW&code=KRW,USD,JPY",function(data){
+				console.log(data);
+				console.log(data[1].rate);
+			});
 		});
 	
 	
@@ -44,7 +47,7 @@
 				//1. String 이라면 Json Object 변환
 				//data = data.trim();
 				console.log(data);
-				data = JSON.parse(data);
+				//data = JSON.parse(data);//body 어쩌구하면 json으로 넘겨오니까 필요없음
 				console.log(data);
 				console.log(data.num);
 				console.log(data.title);

@@ -39,7 +39,7 @@
 					success:function(imageName){
 						console.log(imageName);
 						imageName=imageName.trim();
-						$("#contents").summernote('editor.insertImage', imageName);
+						$("#content").summernote('editor.insertImage', imageName);
 					}
 					
 				});

@@ -68,7 +68,7 @@
 			$("#writer").val('');
 			$("#contents").val('');
 			
-			$.post("./memoInsert",{writer:writer,contents:contents}, function(result){
+			$.post("./memoInsert",{writer:writer,contents:contents}, function(result){//getlist.jsp에 것들을 가져오는 result
 				result = result.trim();
 				if(result>0){
 					location.reload();

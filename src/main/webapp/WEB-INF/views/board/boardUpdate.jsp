@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,24 +45,39 @@
     
     </form>
 	</div>
-	
+<script type="text/javascript" src="../resources/js/boardForm.js"></script>	
 <script type="text/javascript" >
 	$("#content").summernote({
 		height :400
 	});
 	
+	$("#content").summernote('code', '${vo.content}');
+	
+	var size = ${size};
+	
+	size = ${vo.boardFileVOs.size()};
+	
+	size = ${fn:length(vo.boardFileVOs)};
+	
+	
+	
+	count = count+size;
 	
 	$(".fileDelete").click(function() {
+		var check = confirm("정말 지울 거냐??");
+		if(check){
 		var s= $(this);
-		$.post("../boardFile/fileDelete",{fileNum:$(this).attr("id")},function(data){
+		$.post("../boardFile/fileDelete",{fileNum:$(this).attr("id"), board:$(this).attr("title")},function(data){
 			
-			if(data.trim()>0){
+			if(data>0){
 				s.parent().remove();
+				count--;
 				alert("success");
 			}else{
 				alert("File Delete Fail")
 			}
 		});
+		}
 	});
 
 </script>
