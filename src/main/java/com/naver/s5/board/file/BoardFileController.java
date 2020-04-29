@@ -43,5 +43,13 @@ public class BoardFileController {
 
 		return mv;
 	}
+	
+	@PostMapping("summerDelete")
+	public ModelAndView fileDelete(String fileName)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = boardFileService.fileDelete(fileName);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+	}
 
 }

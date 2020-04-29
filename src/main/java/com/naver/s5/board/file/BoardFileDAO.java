@@ -22,11 +22,14 @@ public class BoardFileDAO {
 	public int fileDelete(BoardFileVO boardFileVO) throws Exception{
 		return sqlSession.delete(NAMESPACE+"fileDelete",boardFileVO);
 	}
-	public int fileDeleteAll(Long num)throws Exception{
-		return sqlSession.delete(NAMESPACE+"fileDeletes", num);
-	}
+
 	
-	public List<BoardFileVO> fileList(Long num)throws Exception{
-		return sqlSession.selectList(NAMESPACE+"fileList", num);
+	public int fileDeletes(Long num) throws Exception{
+		return sqlSession.delete(NAMESPACE+"fileDeletes",num);
+
 	}
+	public List<BoardFileVO> fileList(Long num) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"fileList",num);
+	}
+
 }

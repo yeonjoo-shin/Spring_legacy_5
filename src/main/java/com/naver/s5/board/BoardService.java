@@ -14,7 +14,7 @@ public interface BoardService {
 	//insert
 	public int boardWrite(BoardVO boardVO,MultipartFile [] files) throws Exception;
 	//update
-	public int boardUpdate(BoardVO boardVO) throws Exception;
+	public int boardUpdate(BoardVO boardVO,MultipartFile [] files) throws Exception;
 	//delete
 	public int boardDelete(long num) throws Exception;
 }

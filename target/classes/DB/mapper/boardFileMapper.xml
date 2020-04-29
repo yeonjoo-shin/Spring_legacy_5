@@ -24,5 +24,6 @@
 	<select id="fileList" parameterType="Long" resultType="BoardFileVO">
 		select * from boardFile where num=#{num}
 	</select>
+
  	
  </mapper>

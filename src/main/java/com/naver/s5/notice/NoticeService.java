@@ -74,12 +74,55 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
-		return noticeDAO.boardUpdate(boardVO);
+	public int boardUpdate(BoardVO boardVO,MultipartFile [] files) throws Exception {
+		//hdd file save
+		
+		String path= session.getServletContext().getRealPath("/resources/uploadnotice");//어느경로에 저장 할 것인가
+		System.out.println(path);
+		
+		//시퀀스 받기
+		//boardVO.setNum(noticeDAO.boardNum());
+		
+		//notice table insert
+		int result=noticeDAO.boardUpdate(boardVO);
+		
+		//저장
+		for(MultipartFile file:files) {
+			if(file.getSize()>0) { //data가 있을 경우만
+				BoardFileVO boardFileVO = new BoardFileVO();
+				String fileName = fileSaver.saveByTransfer(file, path);//파일과 경로 저장, 리턴으로 이름이 온다
+//				System.out.println(fileName);//오는지 확인
+				
+				//db에 저장
+				
+				boardFileVO.setNum(boardVO.getNum());//글번호 받아오기
+				boardFileVO.setFileName(fileName);
+				boardFileVO.setOriName(file.getOriginalFilename());
+				boardFileVO.setBoard(1);//notice 
+				result=boardFileDAO.fileInsert(boardFileVO);
+			}
+		}
+		
+		
+		return result;
 	}
 
 	@Override
 	public int boardDelete(long num) throws Exception {
+		List<BoardFileVO> list = boardFileDAO.fileList(num);//list 가져오기			
+		
+		//1.HDD 에 해당 파일들을 삭제
+		String path = session.getServletContext().getRealPath("/resources/uploadnotice");//저장된 경로명
+		System.out.println(path);
+		
+		for(BoardFileVO boardFileVO : list) {
+			fileSaver.deleteFile(boardFileVO.getFileName(), path);//삭제할 파일 이름과 경로명
+		}
+		
+		//2. db에서 삭제
+		boardFileDAO.fileDeletes(num);
+	
+		
 		return noticeDAO.boardDelete(num);
 	}
 	
