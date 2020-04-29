@@ -36,7 +36,8 @@ public class BoardFileService {
 		fileSaver.deleteFile(boardFileVO.getFileName(), path);
 		return result;
 	}
-
+	
+	//summernote안에 파일 넣어다 삭제하는 것
 	public String fileInsert(MultipartFile files) throws Exception{
 		String path = servletContext.getRealPath("/resources/summer");
 		System.out.println(path);
