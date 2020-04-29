@@ -13,9 +13,16 @@
  		select * from boardFile where fileNum=#{fileNum} and board=#{board}
  	</select>
  	
- 	<delete id="fileDelete" parameterType="Long">
+ 	<delete id="fileDelete" parameterType="BoardFileVO">
  		delete boardFile  where fileNum=#{fileNum}
  	</delete>
  	
+ 	<delete id="fileDeletes" parameterType="Long">
+		delete boardFile where num = #{num}
+	</delete>
+	
+	<select id="fileList" parameterType="Long" resultType="BoardFileVO">
+		select * from boardFile where num=#{num}
+	</select>
  	
  </mapper>

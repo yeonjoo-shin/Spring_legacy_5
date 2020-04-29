@@ -40,8 +40,8 @@
 	              contentType:false,
 	              processData:false,
 	              success:function(imageName){}
-	              	imageName = imageName.trim();
-	              	$(editor).summernote('editor.insertImage',imageName);
+//	              	imageName = imageName.trim();
+//	              	$(editor).summernote('editor.insertImage',imageName);
 	              //하드디스크에 저장 후 > 저장된 이름 > 이쪽으로 받아줄거임 > img태그 써서 경로명 붙일 거임
 	                
 	             });

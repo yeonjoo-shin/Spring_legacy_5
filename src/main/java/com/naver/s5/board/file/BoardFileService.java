@@ -35,6 +35,8 @@ public class BoardFileService {
 	public String fileInsert(MultipartFile files) throws Exception{
 		String path = servletContext.getRealPath("/resources/summer");
 		System.out.println(path);
+		path = fileSaver.saveByTransfer(files, path);
+		path = servletContext.getContextPath()+"/resources/summer/"+path;
 		return fileSaver.saveByTransfer(files, path);
 		
 	}
