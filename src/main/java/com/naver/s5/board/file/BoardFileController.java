@@ -50,6 +50,7 @@ public class BoardFileController {
 		int result = boardFileService.fileDelete(fileName);
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
+		return mv;
 	}
 
 }
