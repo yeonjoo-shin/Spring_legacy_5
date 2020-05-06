@@ -26,8 +26,41 @@
 		<beans:property name="order" value="0"></beans:property>
 	</beans:bean>
 	
-	<context:component-scan base-package="com.naver.s5" />
+	<beans:bean class="com.naver.s5.interceptor.NoticeInterceptor" id="noticeInterceptor"></beans:bean>
+	<beans:bean class="com.naver.s5.interceptor.MemberInterceptor" id="memberInterceptor"></beans:bean>
+	<beans:bean class="com.naver.s5.interceptor.QnaInterceptor" id="qnaInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/qna/*"/>
+			<exclude-mapping path="/qna/qnaList"/>
+			<beans:ref bean="qnaInterceptor"/>
+		</interceptor>
 	
 	
+		<interceptor>
+			<mapping path="/member/memberPage"/>
+			<beans:ref bean="memberInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/notice/*"/><!-- 이 전체 중에서 -->
+			<exclude-mapping path="/notice/noticeList"/><!-- 이것들을 제외하고 -->
+			<exclude-mapping path="/notice/noticeSelect"/>
+			
+			<beans:ref bean="noticeInterceptor"/><!-- 방법1)만들어진객체를 가지고 올 수 있음 -->
+		</interceptor>
+		
+		<interceptor>
+			<!-- URL pattern -->
+			<mapping path="/*"/>
+			<!-- interceptor class -->
+			<beans:bean class="com.naver.s5.interceptor.TestInterceptor"><!-- 방법2)만들면서 바로 -->
+			</beans:bean>
+		</interceptor>
+	
+	</interceptors>
+	
+		<context:component-scan base-package="com.naver.s5" />
 	
 </beans:beans>
