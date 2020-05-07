@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.naver.s5.board.BoardService;
@@ -49,8 +50,10 @@ public class NoticeService implements BoardService {
 		noticeDAO.hitUpdate(num);
 		return noticeDAO.boardSelect(num);
 	}
-
+	
+	
 	@Override
+	@Transactional // rollback
 	public int boardWrite(BoardVO boardVO,MultipartFile [] files) throws Exception {
 		String path = session.getServletContext().getRealPath("/resources/uploadnotice");
 		System.out.println(path);
@@ -70,6 +73,9 @@ public class NoticeService implements BoardService {
 			boardFileVO.setOriName(file.getOriginalFilename());
 			boardFileVO.setBoard(1);
 			boardFileDAO.fileInsert(boardFileVO);//보드파일테이블 insert
+				if(result<1) {
+					throw new Exception();// 롤백을 위한 강제 예외처리
+				}
 			}
 		}
 		
@@ -77,8 +83,25 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
-		return noticeDAO.boardUpdate(boardVO);
+	public int boardUpdate(BoardVO boardVO, MultipartFile [] files) throws Exception {
+		//HDD file save
+				String path = servletContext.getRealPath("/resources/uploadnotice");
+				System.out.println(path);
+				int result = noticeDAO.boardUpdate(boardVO);
+				for(MultipartFile multipartFile:files) {
+					 
+					if(multipartFile.getSize()>0) {
+						BoardFileVO boardFileVO = new BoardFileVO();
+						
+						boardFileVO.setFileName(fileSaver.saveFileByUtils(multipartFile, path));
+						boardFileVO.setOriName(multipartFile.getOriginalFilename());
+						boardFileVO.setNum(boardVO.getNum());
+						boardFileVO.setBoard(1);
+						result = boardFileDAO.fileInsert(boardFileVO);
+					}
+				}
+				
+				return result;
 	}
 
 	@Override

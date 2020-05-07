@@ -52,8 +52,8 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
-	public String boardUpdate(QnaVO qnaVO) throws Exception{
-		int result = qnaService.boardUpdate(qnaVO);
+	public String boardUpdate(QnaVO qnaVO, MultipartFile [] files) throws Exception{
+		int result = qnaService.boardUpdate(qnaVO,files);
 		String path="";
 		
 		if(result>0) {

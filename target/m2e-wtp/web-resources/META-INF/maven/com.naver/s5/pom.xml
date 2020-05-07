@@ -21,8 +21,13 @@
 			    <version>2.10.1</version>
 			</dependency>
 		
-		
-		
+		<!-- spring-tx -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+				
 		<!-- commons-fileupload -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
