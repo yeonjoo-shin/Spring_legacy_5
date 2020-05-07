@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class NoticeService implements BoardService {
 	private HttpSession session;
 	@Autowired
 	private BoardFileDAO boardFileDAO;
+	@Autowired
+	private ServletContext servletContext;
 	
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {		
@@ -80,9 +83,23 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int boardDelete(long num) throws Exception {
+		List<BoardFileVO> list = boardFileDAO.fileList(num);
+		//1. HDD에 해당 파일들을 삭제
+		String path = servletContext.getRealPath("/resources/uploadnotice");
+		System.out.println(path);
+		
+		for(BoardFileVO boardFileVO:list) {
+			fileSaver.deleteFile(boardFileVO.getFileName(), path);
+		}
+		
+		//2. DB에 삭제
+		boardFileDAO.fileDeleteAll(num);
+		
 		return noticeDAO.boardDelete(num);
+	}
+		
 	}
 	
 	
 
-}
+
