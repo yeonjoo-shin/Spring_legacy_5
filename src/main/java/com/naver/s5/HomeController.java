@@ -34,19 +34,13 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
+	
+		transfer.bus(1000);
+	
+		transfer.subway(2000,"2호선");
 		
-		Card card = new Card();
-		
-		card.cardCheck();
-		transfer.bus();
-		card.cardCheck();
-		
-		card.cardCheck();
-		transfer.subway();
-		card.cardCheck();
-		
-		
-		
+		transfer.taxi();
+	
 		return "index";
 	}
 	

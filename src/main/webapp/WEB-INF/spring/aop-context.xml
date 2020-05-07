@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
-
+	
+	      <bean class="com.naver.s5.transfer.Card" id="card"></bean>   
+      <bean class="com.naver.s5.transfer.Transfer" id="transfer"></bean>
+      
+         
+      <aop:config>
+         <aop:aspect id="cardCheck" ref="card" > <!-- 1) advice 누구냐 설정 : card, 2) pointcut 설정 : bus, subway-->
+            <aop:pointcut expression="execution(* com.naver.s5.transfer.Transfer.*(*, *))" id="trans"/>
+            <!--* 모든 메서드 / ()중 매개변수 없는 메서드 / (.) 매개변수 하나-->
+            <aop:around method="cardCheck" pointcut-ref="trans"/><!-- 어느 메서드를 around에 실행할 것이냐 / 어떤 pointcut 참조할 것이냐  -->
+         </aop:aspect>
+     	
+     	<aop:aspect id="taxicard" ref="card">
+     		<aop:pointcut expression="execution(* com.naver.s5.transfer.Transfer.*())" id="ta"/>
+     		<aop:after-returning method="cardAfter" pointcut-ref="ta"/>
+     	</aop:aspect>
+     
+      </aop:config>
+      
+     
 
 
 </beans>
