@@ -66,7 +66,7 @@ public class NoticeService implements BoardService {
 			boardFileVO.setFileName(fileName);
 			boardFileVO.setOriName(file.getOriginalFilename());
 			boardFileVO.setBoard(1);
-			boardFileDAO.fileInsert(boardFileVO);
+			boardFileDAO.fileInsert(boardFileVO);//보드파일테이블 insert
 			}
 		}
 		
