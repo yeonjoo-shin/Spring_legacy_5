@@ -57,6 +57,7 @@
  		select * from
 			(select N.*, rownum R from
 				(select * from notice where 
+				<!-- 컬럼명이 바뀌는 것 -->
 				<choose>
 					<when test="kind =='bn'">
 						name

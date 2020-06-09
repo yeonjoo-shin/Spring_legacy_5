@@ -110,6 +110,7 @@ public class QnaController {
 		mv.setViewName("board/boardList");
 		return mv;
 	}
+	
 	@GetMapping("qnaReply")
 	public ModelAndView boardReply(ModelAndView mv, long num) throws Exception{
 		mv.addObject("num",num);//부모의 글번호

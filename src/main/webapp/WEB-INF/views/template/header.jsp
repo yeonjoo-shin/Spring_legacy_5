@@ -20,11 +20,16 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
     <c:if test="${empty member}">
+	   
       <li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </c:if>
     
     <c:if test="${not empty member}">
+    	<c:if test="${member.id eq 'admin'}">
+		    <li><a href="${pageContext.request.contextPath}/product/productAdmin">관리자모드</a></li>
+		</c:if>
+	<li><a href="./join.jsp">MyPage</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberPage"><span class="glyphicon glyphicon-user"></span> My Page</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </c:if>

@@ -17,6 +17,7 @@
 	<h1>${board} List</h1>
 		 <form class="form-inline" action="./${board}List">
 		    <div class="input-group input-group-sm col-xs-2" >
+		    
 		    	<select class="form-control" id="sel1" name="kind">
 				    <option value="bt">Title</option>
 				    <option value="bc">Content</option>
@@ -26,11 +27,11 @@
   				
   				<div class="input-group input-group-sm col-xs-4">
   				
-		      <input type="text" class="form-control" placeholder="Search" name="search">
-		      <div class="input-group-btn">
-		        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		      </div>
-	    </div>
+			      <input type="text" class="form-control" placeholder="Search" name="search">
+			      <div class="input-group-btn">
+			        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+			      </div>
+	    		</div>
 	 	 </form>
 	 	 </div>
 	 	 
@@ -48,10 +49,10 @@
 			<td>${vo.num}</td>
 			<td>
 			<c:catch>
-			<c:forEach begin="1" end="${vo.depth}">
+			 <c:forEach begin="1" end="${vo.depth}">
 			 	--
 			 	<!-- &nbsp;&nbsp; //스페이스바역할 -->
-			</c:forEach>
+			</c:forEach> 
 			</c:catch>
 			<a href="./${board}Select?num=${vo.num}"> ${vo.title }</a></td>
 			<td>${vo.name }</td>
@@ -74,6 +75,7 @@
 			</c:if>
 			</ul>
 		</div>
+		
 		<a href="./${board}Write" class="btn btn-danger">write</a>
 		<c:catch>
 		<c:choose>

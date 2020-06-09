@@ -33,6 +33,8 @@
     </div>
     
     <input type="button" id="add" class="btn btn-info" value="AddFile">
+   
+   
     <div id="file">
 	   
     </div>
@@ -42,8 +44,13 @@
 </form>
 </div>
 
-<script type="text/javascript" src="../resources/js/boardForm.js">
 
+<script type="text/javascript" src="../resources/js/boardForm.js">
+////$("선택자"). action();
+
+$("#content").summernote({
+	height : 400
+});
 </script>
 
 		

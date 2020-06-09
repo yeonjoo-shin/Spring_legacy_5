@@ -35,6 +35,7 @@ public class BoardFileController {
 		mv.setViewName("fileDown");
 		return mv;
 	}
+	
 	@PostMapping("fileDelete")
 	@ResponseBody
 	public int fileDelete(BoardFileVO boardFileVO)throws Exception{

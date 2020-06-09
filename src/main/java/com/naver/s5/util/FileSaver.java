@@ -93,7 +93,7 @@ public class FileSaver {
 		File file = new File(path,fileName);
 		boolean check=false;
 		int result=0;
-		if(file.exists()) {
+		if(file.exists()) { //파일이 존재하면 삭제
 			check = file.delete();
 		}
 		if(check) {

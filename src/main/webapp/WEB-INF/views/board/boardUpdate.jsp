@@ -74,6 +74,7 @@
 				count--;
 				alert("success");
 			}else{
+				console.log($(this).attr("id"));
 				alert("File Delete Fail")
 			}
 		});
